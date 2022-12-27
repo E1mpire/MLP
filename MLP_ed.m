@@ -1,36 +1,35 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%ÐÕÃû£ºÕÔ×Óî£
-%°à¼¶£º2002011
-%×¨Òµ£ºµç×ÓÐÅÏ¢¹¤³Ì
-%Éè¼ÆÇ°À¡Éñ¾­ÍøÂç£¬±æ±ðMINSTÊý×ÖÆæÅ¼
-%ÊäÈë²ã£º28*28¸öÉñ¾­Ôª£¬Òþº¬²ã£º100¸öÉñ¾­Ôª£¬Êä³ö²ã£º2¸öÉñ¾­Ôª
+%ç­çº§ï¼š2002011
+%ä¸“ä¸šï¼šç”µå­ä¿¡æ¯å·¥ç¨‹
+%è®¾è®¡å‰é¦ˆç¥žç»ç½‘ç»œï¼Œè¾¨åˆ«MINSTæ•°å­—å¥‡å¶
+%è¾“å…¥å±‚ï¼š28*28ä¸ªç¥žç»å…ƒï¼Œéšå«å±‚ï¼š100ä¸ªç¥žç»å…ƒï¼Œè¾“å‡ºå±‚ï¼š2ä¸ªç¥žç»å…ƒ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear,clc
-%%Éú³ÉÊý¾Ýµã
-input_layer=28*28;  %ÊäÈë²ãÏ¸°û¸öÊý
-cell=100;  %Òþº¬²ãÏ¸°û¸öÊý
-output_layer=2;  %Êä³ö²ãÏ¸°û¸öÊý
-n=4000;%Êý¾Ý¼¯´óÐ¡
-t=1000; %²âÊÔ¼¯´óÐ¡
-alpha=0.01;    %Ñ§Ï°Ð§ÂÊ
+%%ç”Ÿæˆæ•°æ®ç‚¹
+input_layer=28*28;  %è¾“å…¥å±‚ç»†èƒžä¸ªæ•°
+cell=100;  %éšå«å±‚ç»†èƒžä¸ªæ•°
+output_layer=2;  %è¾“å‡ºå±‚ç»†èƒžä¸ªæ•°
+n=4000;%æ•°æ®é›†å¤§å°
+t=1000; %æµ‹è¯•é›†å¤§å°
+alpha=0.01;    %å­¦ä¹ æ•ˆçŽ‡
 load('data.mat')
 
 
 
-trainimage=train_image(:,1:n);  %ÑµÁ·¼¯
+trainimage=train_image(:,1:n);  %è®­ç»ƒé›†
 trainlabel=zeros(2,n);
 for i=1:n
-    if mod(train_label(i),2)==0  % Èç¹ûÅ¼ÊýÄÇÃ´µÚÒ»¸ö¾ÍÎª1£¬·´Ö®µÚ¶þ¸öÎª1
+    if mod(train_label(i),2)==0  % å¦‚æžœå¶æ•°é‚£ä¹ˆç¬¬ä¸€ä¸ªå°±ä¸º1ï¼Œåä¹‹ç¬¬äºŒä¸ªä¸º1
         trainlabel(1,i)=1;
     else
         trainlabel(2,i)=1;
     end
 end
 
-testimage=test_image(:,1:t);  %²âÊÔ¼¯
+testimage=test_image(:,1:t);  %æµ‹è¯•é›†
 testlabel=zeros(2,t);
 for i=1:t
-   if mod(test_label(i),2)==0  % Èç¹ûÅ¼ÊýÄÇÃ´µÚÒ»¸ö¾ÍÎª1£¬·´Ö®µÚ¶þ¸öÎª1
+   if mod(test_label(i),2)==0  % å¦‚æžœå¶æ•°é‚£ä¹ˆç¬¬ä¸€ä¸ªå°±ä¸º1ï¼Œåä¹‹ç¬¬äºŒä¸ªä¸º1
         testlabel(1,i)=1;
     else
         testlabel(2,i)=1;
@@ -38,10 +37,10 @@ for i=1:t
 end
 
 %{
-w1=randn(cell,input_layer);%µÚÒ»²ãÉñ¾­ÍøÂçµÄÈ¨Öµ
-w2=randn(output_layer,cell);%µÚ¶þ²ãÉñ¾­ÍøÂçµÄÈ¨Öµ
-b1=randn(cell,1);%µÚÒ»²ãÉñ¾­ÍøÂçµÄÆ«ÖÃ
-b2=randn(output_layer,1);%µÚ¶þ²ãÉñ¾­ÍøÂçµÄÆ«ÖÃ
+w1=randn(cell,input_layer);%ç¬¬ä¸€å±‚ç¥žç»ç½‘ç»œçš„æƒå€¼
+w2=randn(output_layer,cell);%ç¬¬äºŒå±‚ç¥žç»ç½‘ç»œçš„æƒå€¼
+b1=randn(cell,1);%ç¬¬ä¸€å±‚ç¥žç»ç½‘ç»œçš„åç½®
+b2=randn(output_layer,1);%ç¬¬äºŒå±‚ç¥žç»ç½‘ç»œçš„åç½®
 
 w1o=w1;
 w2o=w2;
@@ -49,33 +48,33 @@ b1o=b1;
 b2o=b2;
 %}
 load('init_ed')
-w1=w1o;w2=w2o;b1=b1o;b2=b2o;%¶ÁÈ¡ÌôºÃµÄ³õÖµ
+w1=w1o;w2=w2o;b1=b1o;b2=b2o;%è¯»å–æŒ‘å¥½çš„åˆå€¼
 
 n1=w1*trainimage(:,1)+b1;
-a1=LeakyReLU(n1);                     %µÚÒ»²ã¼¤»îº¯ÊýLeakyRuLU
+a1=LeakyReLU(n1);                     %ç¬¬ä¸€å±‚æ¿€æ´»å‡½æ•°LeakyRuLU
 n2=w2*a1+b2;
-a2=softmax(n2);                       %µÚ¶þ²ã¼¤»îº¯Êýsoftmax
+a2=softmax(n2);                       %ç¬¬äºŒå±‚æ¿€æ´»å‡½æ•°softmax
 
-e=sum(-trainlabel(:,1).*log(a2));             %½»²æìØËðÊ§º¯Êý
+e=sum(-trainlabel(:,1).*log(a2));             %äº¤å‰ç†µæŸå¤±å‡½æ•°
 %%%%%%%%%%%%%%%%%%%%%%
 
     for i=2:n
-        s1=entrosoft(n2,trainlabel(:,i-1));   %¼ÆËãµÚ¶þ²ã¸ü¸ÄÏµÊý
-        s2=(s1'*w2)'.*leaky(n1);                     %¼ÆËãµÚÒ»²ã¸ü¸ÄÏµÊý
+        s1=entrosoft(n2,trainlabel(:,i-1));   %è®¡ç®—ç¬¬äºŒå±‚æ›´æ”¹ç³»æ•°
+        s2=(s1'*w2)'.*leaky(n1);                     %è®¡ç®—ç¬¬ä¸€å±‚æ›´æ”¹ç³»æ•°
         w2=w2-alpha*s1*a1';
         w1=w1-alpha*s2*trainimage(:,i-1)';
         b1=b1-alpha*s2;
         b2=b2-alpha*s1;
-        %²ÎÊý¸üÐÂÍê³É£¬¿ªÊ¼µü´ú
+        %å‚æ•°æ›´æ–°å®Œæˆï¼Œå¼€å§‹è¿­ä»£
         n1=w1*trainimage(:,i)+b1;
-        a1=LeakyReLU(n1);                   %µÚÒ»²ã¼¤»îº¯ÊýLeakyRuLU
+        a1=LeakyReLU(n1);                   %ç¬¬ä¸€å±‚æ¿€æ´»å‡½æ•°LeakyRuLU
         n2=w2*a1+b2;
-        a2=softmax(n2);                     %µÚ¶þ²ã¼¤»îº¯Êýsoftmax
-        e=sum(-trainlabel(:,i).*log(a2)); %½»²æìØËðÊ§º¯Êý
+        a2=softmax(n2);                     %ç¬¬äºŒå±‚æ¿€æ´»å‡½æ•°softmax
+        e=sum(-trainlabel(:,i).*log(a2)); %äº¤å‰ç†µæŸå¤±å‡½æ•°
 
     end
 
-%¿ªÊ¼ÑéÖ¤
+%å¼€å§‹éªŒè¯
 error=0;
 correct=0;
 for i=1:t
@@ -85,19 +84,19 @@ for i=1:t
     a2=softmax(n2);
     [~,posa]=max(a2);
     [~,posl]=max(testlabel(:,i));
-    if posa~=posl    %Èç¹ûÅÐ¶Ï´íÁË
+    if posa~=posl    %å¦‚æžœåˆ¤æ–­é”™äº†
         error=error+1;
     else
         correct=correct+1;
     end
     if mod(i,20)==0
-        fprintf('µ±Ç°Êý¾ÝÎª%d,ÅÐ¶ÏÊý¾ÝÎª%d £¨1ÎªÅ¼Êý0ÎªÆæÊý£©\n',posl-1,posa-1)
+        fprintf('å½“å‰æ•°æ®ä¸º%d,åˆ¤æ–­æ•°æ®ä¸º%d ï¼ˆ1ä¸ºå¶æ•°0ä¸ºå¥‡æ•°ï¼‰\n',posl-1,posa-1)
     end
 end
 
-disp(['>>Ä£ÐÍÕýÈ·ÂÊÎª',num2str(correct/(correct+error))])
+disp(['>>æ¨¡åž‹æ­£ç¡®çŽ‡ä¸º',num2str(correct/(correct+error))])
 function y=LeakyReLU(x)
-%µ±gradÎªFalseµÄÊ±ºòÊä³öº¯ÊýÖµ£¬µ±gradÎªTrueµÄÊ±ºòÊä³öµ¼ÊýÖµ
+%å½“gradä¸ºFalseçš„æ—¶å€™è¾“å‡ºå‡½æ•°å€¼ï¼Œå½“gradä¸ºTrueçš„æ—¶å€™è¾“å‡ºå¯¼æ•°å€¼
     if x<0
         y=0;
     else
@@ -105,18 +104,18 @@ function y=LeakyReLU(x)
     end
 end
 function f=leaky(x)
-%LeakyReLUµÄµ¼º¯Êý
+%LeakyReLUçš„å¯¼å‡½æ•°
 x(x<0)=0;
 x(x>=0)=1;
 f=x;
 end
 function y=softmax(x)
-%µ±gradÎªFalseµÄÊ±ºòÊä³öº¯ÊýÖµ£¬µ±gradÎªTrueµÄÊ±ºòÊä³öµ¼ÊýÖµ
+%å½“gradä¸ºFalseçš„æ—¶å€™è¾“å‡ºå‡½æ•°å€¼ï¼Œå½“gradä¸ºTrueçš„æ—¶å€™è¾“å‡ºå¯¼æ•°å€¼
     m=exp(x);
     y=m/sum(m);
 end
 function f=entrosoft(x,label)
-%Ö±½Ó¼ÆËã³ös1£¬Íü¼ÇÁË¾Í¿´https://blog.csdn.net/abc13526222160/article/details/84968161?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166918799816800180699635%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=166918799816800180699635&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-3-84968161-null-null.142^v66^control,201^v3^control_1,213^v2^t3_control1&utm_term=%E4%BA%A4%E5%8F%89%E7%86%B5%20%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84BP&spm=1018.2226.3001.4187
+%ç›´æŽ¥è®¡ç®—å‡ºs1ï¼Œå¿˜è®°äº†å°±çœ‹https://blog.csdn.net/abc13526222160/article/details/84968161?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166918799816800180699635%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=166918799816800180699635&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-3-84968161-null-null.142^v66^control,201^v3^control_1,213^v2^t3_control1&utm_term=%E4%BA%A4%E5%8F%89%E7%86%B5%20%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84BP&spm=1018.2226.3001.4187
     m=exp(x);
     y=m/sum(m);
     f=y-label;
